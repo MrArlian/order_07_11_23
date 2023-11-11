@@ -1,7 +1,7 @@
 import urllib.parse as urlparse
 import uuid
 
-from flask import redirect, request, make_response, jsonify
+from flask import redirect, request, make_response
 from flask.blueprints import Blueprint
 
 import jmespath
@@ -45,7 +45,7 @@ def yandex_oauth_callback():
         value=yandex_direct_api.get_access_token(auth_code),
         max_age=31_104_000,
         domain=Settings.domain,
-        # secure=True,
+        secure=True,
         httponly=True
     )
     return response
