@@ -6,3 +6,5 @@ WORKDIR /home/site
 COPY . /home/site
 
 RUN pip install -r requirements.txt
+
+CMD [ "python", "app/main.py" ]

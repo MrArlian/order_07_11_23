@@ -25,7 +25,7 @@ class _Settings(BaseSettings):
     app_path: _Path = _Path()
 
     class Config:
-        env_file = Path(root_dir, 'config', 'dev.ini')
+        env_file = Path(root_dir, 'config', 'prod.ini')
         env_file_encoding = 'utf-8'
         env_nested_delimiter = '.'
 

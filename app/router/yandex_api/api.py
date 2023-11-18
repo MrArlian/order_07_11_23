@@ -52,11 +52,10 @@ class YandexDirectApi:
         params: dict = None
     ) -> requests.Response:
 
+        assert not (access_token is None and self.token is None)
+
         if isinstance(path, str):
             path = (path,)
-
-        if access_token is None and self.token is None:
-            raise
 
         _data = json.dumps(data or {})
         _url = '/'.join((self.api_url, self.api_version, *path))
@@ -150,6 +149,6 @@ class YandexDirectApi:
         response = self.session.post(f'{self.oauth_url}/token', data)
 
         if response.status_code != 200:
-            raise
+            raise ValueError
 
         return response.json().get('access_token')

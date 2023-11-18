@@ -38,11 +38,16 @@ def yandex_oauth_callback():
 
     if auth_code is None:
         return redirect('/')
+    
+    try:
+        token = yandex_direct_api.get_access_token(auth_code)
+    except ValueError:
+        return
 
     response = make_response(redirect('/'))
     response.set_cookie(
         key='yandex_token',
-        value=yandex_direct_api.get_access_token(auth_code),
+        value=token,
         max_age=31_104_000,
         domain=Settings.domain,
         secure=True,
